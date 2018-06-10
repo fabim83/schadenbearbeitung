@@ -1,0 +1,19 @@
+{
+  "name": "schadenbearbeitung",
+  "version": "1.0.0",
+  "description": "Projekt zur Simulation einer Schadenschnittstelle",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabim83/schadenbearbeitung.git"
+  },
+  "author": "Fabian M.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabim83/schadenbearbeitung/issues"
+  },
+  "homepage": "https://github.com/fabim83/schadenbearbeitung#readme"
+}
