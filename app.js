@@ -16,16 +16,19 @@ MongoClient.connect('mongodb://test:test5101@ds127321.mlab.com:27321/schadenbear
     if (err) return console.log(err);
     db = client.db('schadenbearbeitung');
     // Server auf Port starten
-    app.listen(app.get('port'), function () {
+    app.listen(app.get('port'), "192.168.2.100", function () {
         console.log('Server auf Port ' + app.get('port') + ' gestartet.')
     });
 });
 
 app.post('/schaden-anlegen', (req, res) => {
     db.collection('schaeden').save(req.body, (err, result) => {
-        if (err) return console.log(err);
-    
-        console.log('saved to database');
-        res.redirect('/');
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else {
+            console.log('saved to database');
+            res.sendStatus(200);
+        }
     });
 });
