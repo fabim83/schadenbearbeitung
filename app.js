@@ -7,6 +7,12 @@ const MongoClient = require('mongodb').MongoClient;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 // Port setzten
 app.set('port', (process.env.PORT || 3000));
 
@@ -21,19 +27,19 @@ MongoClient.connect('mongodb://test:test5101@ds127321.mlab.com:27321/schadenbear
     });
 });
 
-app.post('/schaden-anlegen', (req, res) => {
+app.post('/schaden-anlegen', (req, res, next) => {
     db.collection('schaeden').save(req.body, (err, result) => {
         if (err) {
             console.log(err);
             res.send(err);
         } else {
-            console.log('saved to database');
-            res.sendStatus(200);
+            console.log('saved to database ' + new Date());
+            res.send(result);
         }
     });
 });
 
-app.get('/schaeden-lesen', (req, res) => {
+app.get('/schaeden-lesen', (req, res, next) => {
     var query = { bestandskontonummer: req.query.bestandskontonummer };
     db.collection('schaeden').find(query).toArray((err, result) => {
         if (err) {
@@ -43,4 +49,8 @@ app.get('/schaeden-lesen', (req, res) => {
             res.send(result);
         }
     });
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html')
 });
