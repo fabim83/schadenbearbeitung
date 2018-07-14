@@ -22,7 +22,7 @@ MongoClient.connect('mongodb://test:test5101@ds127321.mlab.com:27321/schadenbear
     if (err) return console.log(err);
     db = client.db('schadenbearbeitung');
 
-    app.listen(app.get('port'), "192.168.2.100", function () {
+    app.listen(app.get('port'), function () {
         console.log('Server auf Port ' + app.get('port') + ' gestartet.')
     });
 });
